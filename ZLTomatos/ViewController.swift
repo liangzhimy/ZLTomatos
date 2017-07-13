@@ -8,11 +8,15 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, ZLTimeManagerDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ZLTimeManager.sharedInstance.delegate = self
+        ZLTimeManager.sharedInstance.start()
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -22,6 +26,13 @@ class ViewController: NSViewController {
         }
     }
 
+    func didTimeOut(type: ZLTimeType) -> Void {
+        print("timeOut")
+    }
+    
+    func didTimeTrigger(type: ZLTimeType, remainderTimeInterval: TimeInterval?) {
+        print("remainderTimer \(remainderTimeInterval!)")
+    }
 
 }
 
